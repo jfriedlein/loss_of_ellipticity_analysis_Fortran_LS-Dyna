@@ -4,6 +4,11 @@
 c		
 c @todo Extend or change this, so we can call it from utan
 c @todo Option to choose dS_dC or E and PK2 or Cauchy_stress
+c @todo Might be more efficient to to this in utan, but utan is
+c        not guaranteed to be called for the final Newton iteration
+c @todo A lot of output is written, because we check the loE in
+c every iteration. Therefore, we might need a script that extracts all
+c loE and idele for the last converged NR-iteration of each time step.
 c
       use Tensor
 c
