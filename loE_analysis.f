@@ -59,17 +59,17 @@ c Transform dS_dC to dP_dF
 	  enddo
 c
 c Choose the number of steps to discretise the normal vectors
-	  dim = 3;
-		select case( dim )
-		case ( 2 )
-		n_angle_steps = 1000
-		case ( 3 )
+	dim = 3;
+	select case( dim )
+	  case ( 2 )
+		n_angle_steps = 10000
+	  case ( 3 )
 		n_angle_steps = 20!100
-		case default
-	   write( *, * ) "ellipticity_check<<
-     & Dimension (",dim,") is not available,"
+	  case default
+	    write( *, * ) "ellipticity_check<<
+     & Dimension (",dim,") is not available."
 		stop
-	  end select 
+	 end select 
 c
 c Loop over all possible normal vectors and compute the det(q) for each
 	  det_q_min = 9.9999e20
@@ -108,6 +108,8 @@ c
 	enddo ! i_alpha
 c
 c
+	open (unit = 16, file = "F-q.txt")
+	write(16,*) defoGrad_F%ab(1,2), det_q_min/1.4765625e15
 	    if ( det_q_min < -1e-14 ) then
 			write(iomsg,*) "### loss of ellipticity_loE detected",
      &		det_q_min," for idele ",idele," ###"
